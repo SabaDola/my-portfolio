@@ -1,0 +1,157 @@
+
+    <div class="portfolio-container">
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="nav-logo">{{ personalInfo.name }}</div>
+          <ul class="nav-menu">
+            <li><a href="#home" (click)="scrollTo('home')">მთავარი</a></li>
+            <li><a href="#about" (click)="scrollTo('about')">ჩემ შესახებ</a></li>
+            <li><a href="#skills" (click)="scrollTo('skills')">უნარები</a></li>
+            <li><a href="#projects" (click)="scrollTo('projects')">პროექტები</a></li>
+            <li><a href="#contact" (click)="scrollTo('contact')">კონტაქტი</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section id="home" class="hero-section">
+        <div class="hero-content" [@fadeInUp]>
+          <h1 class="hero-title">{{ personalInfo.name }}</h1>
+          <h2 class="hero-subtitle">{{ personalInfo.title }}</h2>
+          <p class="hero-description">{{ personalInfo.description }}</p>
+          <div class="hero-buttons">
+            <button class="btn-primary" (click)="scrollTo('projects')">პროექტების ნახვა</button>
+            <button class="btn-outline" (click)="scrollTo('contact')">კონტაქტი</button>
+          </div>
+        </div>
+        <div class="hero-scroll">
+          <span>გადაადგილება ქვემოთ</span>
+          <div class="scroll-arrow"></div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="about-section">
+        <div class="container">
+          <h2 class="section-title">ჩემ შესახებ</h2>
+          <div class="about-content">
+            <div class="about-text">
+              <p>{{ personalInfo.aboutMe }}</p>
+              <div class="about-stats">
+                <div class="stat">
+                  <h3>{{ projects.length }}+</h3>
+                  <p>პროექები</p>
+                </div>
+                <div class="stat">
+                  <h3>{{ personalInfo.experience }}+</h3>
+                  <p>წლები გამოცდილება</p>
+                </div>
+                <div class="stat">
+                  <h3>{{ skills.length }}+</h3>
+                  <p>ტექნოლოგიები</p>
+                </div>
+              </div>
+            </div>
+            <div class="about-image">
+              <img [src]="personalInfo.profileImage" [alt]="personalInfo.name">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="skills-section">
+        <div class="container">
+          <h2 class="section-title">უნარები და ტექნოლოგიები</h2>
+          <div class="skills-grid">
+            <div class="skill-category" *ngFor="let category of getSkillCategories()">
+              <h3>{{ category }}</h3>
+              <div class="skills-list">
+                <div class="skill-item" *ngFor="let skill of getSkillsByCategory(category)" [@slideInLeft]>
+                  <div class="skill-info">
+                    <span class="skill-name">{{ skill.name }}</span>
+                    <span class="skill-percent">{{ skill.level }}%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress" [style.width.%]="skill.level"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="projects-section">
+        <div class="container">
+          <h2 class="section-title">ჩემი პროექტები</h2>
+          <div class="projects-grid">
+            <div class="project-card" *ngFor="let project of projects; let i = index" [@fadeInUp]="i">
+              <div class="project-image">
+                <img [src]="project.imageUrl" [alt]="project.title">
+                <div class="project-overlay">
+                  <div class="project-links">
+                    <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" class="project-link">
+                      <i class="icon-external"></i>
+                    </a>
+                    <a *ngIf="project.githubUrl" [href]="project.githubUrl" target="_blank" class="project-link">
+                      <i class="icon-github"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="project-content">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <div class="project-tech">
+                  <span class="tech-tag" *ngFor="let tech of project.technologies">{{ tech }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Add New Project Button -->
+          <div class="add-project-section">
+            <button class="btn-add-project" (click)="addNewProject()">+ ახალი პროექტის დამატება</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="contact-section">
+        <div class="container">
+          <h2 class="section-title">კონტაქტი</h2>
+          <div class="contact-content">
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="icon-mail"></i>
+                <span>{{ personalInfo.email }}</span>
+              </div>
+              <div class="contact-item">
+                <i class="icon-phone"></i>
+                <span>{{ personalInfo.phone }}</span>
+              </div>
+              <div class="contact-item">
+                <i class="icon-location"></i>
+                <span>{{ personalInfo.location }}</span>
+              </div>
+            </div>
+            <div class="social-links">
+              <a *ngFor="let social of personalInfo.socialLinks" [href]="social.url" target="_blank" class="social-link">
+                <i [class]="'icon-' + social.platform"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2025 {{ personalInfo.name }}. ყველა უფლება დაცულია.</p>
+        </div>
+      </footer>
+    </div>
+  

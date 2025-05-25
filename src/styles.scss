@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+
+// ძირითადი ფონური ფერი და ტექსტის ფერი მთელ საიტზე
+body {
+  background: #f7fafc;
+  color: #2d3748;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+// Scrollbar სტილი (Chrome, Edge, Safari)
+::-webkit-scrollbar {
+  width: 10px;
+  background: #e2e8f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #764ba2;
+}
+
+// Selection highlight
+::selection {
+  background: #667eea;
+  color: #fff;
+}
+
+// ლინკები
+a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+// ღილაკები (ზოგადი სტილი)
+button {
+  font-family: inherit;
+  outline: none;
+  border: none;
+}
+
+// Responsive fix for container
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+// სექციებს შორის დაშორება
+section {
+  margin-bottom: 40px;
+}
+
+// სურათების სტილი
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Import main component styles
+@import './app/app.component.scss';
